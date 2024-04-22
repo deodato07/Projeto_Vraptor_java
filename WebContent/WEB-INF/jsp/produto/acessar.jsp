@@ -20,6 +20,12 @@
 
 </form>
 
+<br>
+
+<c:forEach var="produto" items="${produtos}">
+    ${produto.nome} - ${produto.preco} <br/>
+</c:forEach>
+
 
 </body>
 </html>

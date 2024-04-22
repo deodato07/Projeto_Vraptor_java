@@ -1,10 +1,6 @@
 package br.com.projeto.controller;
 
 
-import java.lang.ProcessBuilder.Redirect;
-
-import org.hibernate.Hibernate;
-
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -26,7 +22,7 @@ public class ProdutoController {
 
 	public void acessar() {
 
-		result.include("x", 1000);
+		result.include("produtos", HibernateUtil.buscar(new Produto()));
 	}
 
 	public void salvar(Produto produto) {
