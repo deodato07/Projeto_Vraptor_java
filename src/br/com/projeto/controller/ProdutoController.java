@@ -1,10 +1,15 @@
 package br.com.projeto.controller;
 
 
+import java.lang.ProcessBuilder.Redirect;
+
+import org.hibernate.Hibernate;
+
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import br.com.projeto.hibernate.HibernateUtil;
 import br.com.projeto.model.Produto;
 
 @Resource
@@ -32,9 +37,8 @@ public class ProdutoController {
 			validator.onErrorRedirectTo(this).acessar();
 		}
 
-		System.out.println(produto.getNome());
-		System.out.println(produto.getPreco());
-		System.out.println();
+		HibernateUtil.salvar(produto);
+		result.redirectTo(this).acessar();
 	}
 
 }
