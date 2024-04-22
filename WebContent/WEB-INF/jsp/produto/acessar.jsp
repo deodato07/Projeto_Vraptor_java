@@ -22,8 +22,19 @@
 
 <br>
 
+
+<form action='http://localhost:8080/vraptor-blank-project/produto/pesquisar'>
+
+	<input type="text" name="pesquisa" placeholder="Pesquisa">
+	
+	<input type="submit" value="Pesquisar">
+
+</form>
+
+<br>
+
 <c:forEach var="produto" items="${produtos}">
-    ${produto.nome} - ${produto.preco} <br/>
+    ${produto.nome} - ${produto.preco} <br>
 </c:forEach>
 
 

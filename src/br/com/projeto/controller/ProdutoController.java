@@ -1,6 +1,8 @@
 package br.com.projeto.controller;
 
 
+import java.util.List;
+
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -20,9 +22,24 @@ public class ProdutoController {
 		this.validator = validator;
 	}
 
-	public void acessar() {
+	public void acessar(List<Produto> produtos) {
 
-		result.include("produtos", HibernateUtil.buscar(new Produto()));
+		if (produtos == null) {
+
+			produtos = HibernateUtil.buscar(new Produto());
+		}
+
+		result.include("produtos", produtos);
+	}
+
+	public void pesquisar(String pesquisa) {
+
+		Produto produtoFiltro = new Produto();
+		produtoFiltro.setNome(pesquisa);
+
+		List<Produto> produtos = HibernateUtil.buscar(produtoFiltro);
+
+		result.redirectTo(this).acessar(produtos);
 	}
 
 	public void salvar(Produto produto) {
@@ -30,11 +47,11 @@ public class ProdutoController {
 		if (produto.getNome() == null) {
 
 			validator.add(new ValidationMessage("O nome do produto deve estar preenchido", "Erro"));
-			validator.onErrorRedirectTo(this).acessar();
+			validator.onErrorRedirectTo(this).acessar(null);
 		}
 
 		HibernateUtil.salvar(produto);
-		result.redirectTo(this).acessar();
-	}
 
+		result.redirectTo(this).acessar(null);
+	}
 }
