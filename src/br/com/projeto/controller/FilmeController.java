@@ -3,6 +3,7 @@ package br.com.projeto.controller;
 
 import java.util.List;
 
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -21,7 +22,7 @@ public class FilmeController {
 		this.result = result;
 		this.validator = validator;
 	}
-
+	@Path("/filme/acessar")
 	public void acessar(List<Filme> Filmes) {
 
 		if (Filmes == null) {
@@ -31,7 +32,7 @@ public class FilmeController {
 
 		result.include("Filmes", Filmes);
 	}
-
+	@Path("/filme/pesquisar")
 	public void pesquisar(String pesquisa) {
 	    Filme filmeFiltro = new Filme();
 	    filmeFiltro.setTitulo(pesquisa);
@@ -41,10 +42,18 @@ public class FilmeController {
 
 	    result.of(this).acessar(filmes);
 	}
-
+	@Path("/filme/salvar")
 	public void salvar(Filme filme) {
 	    HibernateUtil.salvar(filme);
 
 	    result.redirectTo(this).acessar(null);
 	}
+	@Path("/filme/editar")
+	public void editar(Integer id) {
+		if(id != null) {
+		Filme filme = HibernateUtil.getById(id);
+		
+		}
+	}
+	
 }
