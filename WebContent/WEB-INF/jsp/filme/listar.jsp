@@ -35,6 +35,10 @@
                         <td>${filme.classificacaoIndicativa}</td>
                         <td>${filme.duracao}</td>
                         <td>${filme.dataLancamento}</td>
+                        
+                        <td>
+				            <a href="/vraptor-blank-project/filme/excluir/${filme.id}" class="btn btn-danger">Excluir</a>
+				        </td>
                     </tr>
                 </c:forEach>
             </tbody>

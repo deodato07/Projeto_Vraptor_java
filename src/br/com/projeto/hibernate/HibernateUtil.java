@@ -3,6 +3,7 @@ package br.com.projeto.hibernate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
@@ -59,5 +60,14 @@ public class HibernateUtil {
 		
 		query.setParameter("id", id);
 		return (Filme) query.getSingleResult();	
+	}
+
+	public static void excluir(Integer id) {
+	    EntityTransaction transaction = em.getTransaction();
+	    transaction.begin();
+	    Query query = em.createQuery("DELETE FROM Filme f WHERE f.id = :id");
+	    query.setParameter("id", id);
+	    query.executeUpdate();
+	    transaction.commit();
 	}
 }

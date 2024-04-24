@@ -52,7 +52,18 @@ public class FilmeController {
 	public void editar(Integer id) {
 		if(id != null) {
 		Filme filme = HibernateUtil.getById(id);
+		result.include("filmeEditar", filme);
+		result.include("formEditar", true);
 		
+		}
+	}
+	@Path("/filme/excluir/{id}")
+	public void excluir (Integer id) {
+		if(id != null) {
+			Filme filme = HibernateUtil.getById(id);
+			HibernateUtil.(filme);
+			
+			result.redirectTo(this).acessar(null);
 		}
 	}
 	
