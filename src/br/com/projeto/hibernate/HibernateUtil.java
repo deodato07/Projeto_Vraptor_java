@@ -62,12 +62,18 @@ public class HibernateUtil {
 		return (Filme) query.getSingleResult();	
 	}
 
-	public static void excluir(Integer id) {
-	    EntityTransaction transaction = em.getTransaction();
-	    transaction.begin();
-	    Query query = em.createQuery("DELETE FROM Filme f WHERE f.id = :id");
-	    query.setParameter("id", id);
-	    query.executeUpdate();
-	    transaction.commit();
+	public static void excluir(Filme filme) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.remove(filme);
+        transaction.commit();
+    }
+	
+	public static void atualizar(Object object) {
+	    Session session = getSessionfactory().openSession();
+	    session.beginTransaction();
+	    session.update(object);
+	    session.getTransaction().commit();
+	    session.close();
 	}
 }

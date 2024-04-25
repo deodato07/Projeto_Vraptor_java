@@ -2,9 +2,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+    
 <html>
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-group {
+            margin-right: 25px;
+        }
+    </style>
 </head>
 <body>
     <fieldset>
@@ -37,7 +44,12 @@
                         <td>${filme.dataLancamento}</td>
                         
                         <td>
-				            <a href="/vraptor-blank-project/filme/excluir/${filme.id}" class="btn btn-danger">Excluir</a>
+                      		<div class="btn-group">
+                                <a href="/vraptor-blank-project/filme/editar/${filme.id}" class="btn btn-primary">Editar</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="/vraptor-blank-project/filme/excluir/${filme.id}" class="btn btn-danger">Excluir</a>
+                            </div>
 				        </td>
                     </tr>
                 </c:forEach>
@@ -45,6 +57,4 @@
         </table>
     </fieldset>
 </body>
-
-
 </html>
